@@ -19,7 +19,7 @@ async def main() -> None:
     _ = load_dotenv()
     init_logger()
     emails = read_emails()
-    sample_emails = emails[:2]
+    sample_emails = emails[10:15]
     email_agent = EmailAgent()
     results: List[AgentExpectedOutput | None] = await email_agent.abatch_process_emails(sample_emails)
 

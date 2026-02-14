@@ -1,6 +1,6 @@
 
 
-from typing import TypedDict, Annotated, List, Literal
+from typing import TypedDict, Annotated, List, Literal, Optional  
 from pydantic import BaseModel, Field
 from enum import StrEnum
 
@@ -15,17 +15,17 @@ class EmailSchema(BaseModel):
 
 class CustomerInformationSchema(BaseModel):
     """Schema for extracting customer information from the email."""
-    name: Annotated[str, Field(description="The name of the customer.")]
-    dates: Annotated[List[str], Field(
+    name: Annotated[Optional[str], Field(description="The name of the customer.")]
+    dates: Annotated[Optional[List[str]], Field(
         description="The dates referenced in the email by the customer, in the format YYYY-MM-DD."
         )]
-    amounts: Annotated[List[str], Field(
+    amounts: Annotated[Optional[List[str]], Field(
         description="The amounts referenced in the email by the customer."
         )]
-    invoice_references: Annotated[List[str], Field(
+    invoice_references: Annotated[Optional[List[str]], Field(
         description="The list of invoice IDs referenced in the email by the customer." \
         "")]
-    dispute_details: Annotated[str, Field(
+    dispute_details: Annotated[Optional[str], Field(
         description="The details of the dispute as described by the customer in the email."
         )]
 
@@ -49,6 +49,7 @@ class AgentExpectedOutput(BaseModel):
     response_email: Annotated[EmailSchema, Field(description=(
         "The response email that the agent should generate based on the input email and the category. "
         "Our company's email address is: info@transformance.com. "
+        "The agent must fill every field in the email schema."
         f"if the category is {Category.PAYMENT_CLAIM.value}, "
         "the response email should include a payment claim response. "
         f"if the category is {Category.DISPUTE.value}, the response email "
