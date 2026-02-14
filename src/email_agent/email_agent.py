@@ -42,7 +42,8 @@ class EmailAgent():
         logger.info("Processing incoming email.")
         response = await self.agent.ainvoke({
             "messages": [HumanMessage(content=email)]
-        }, config={"callbacks": [self.langfuse_handler]})
+        }#, config={"callbacks": [self.langfuse_handler]}
+        )
         logger.info("Email processed successfully.")
         return response.get('structured_response')
     
@@ -52,7 +53,7 @@ class EmailAgent():
         responses = await self.agent.abatch(
             [
                 {"messages": [HumanMessage(content=email)]} for email in emails
-            ], config={"callbacks": [self.langfuse_handler]}
+            ]#, config={"callbacks": [self.langfuse_handler]}
         )
         logger.info("Emails processed successfully.")
         return [
