@@ -15,7 +15,7 @@ class EmailSchema(BaseModel):
 
 class CustomerInformationSchema(BaseModel):
     """Schema for extracting customer information from the email."""
-    name: Annotated[Optional[str], Field(description="The name of the customer.")]
+    name: Annotated[Optional[str], Field(description="The name of the customer. Or the name of their company.")]
     dates: Annotated[Optional[List[str]], Field(
         description="The dates referenced in the email by the customer, in the format YYYY-MM-DD."
         )]
