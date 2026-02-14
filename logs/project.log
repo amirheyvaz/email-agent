@@ -92,3 +92,19 @@
 2026-02-14T12:51:30.643393+0100 - INFO - Processing email with cash application tool.
 2026-02-14T12:51:30.862642+0100 - INFO - Processing email with cash application tool.
 2026-02-14T12:51:33.422866+0100 - INFO - Emails processed successfully.
+2026-02-14T18:25:38.061588+0100 - INFO - Email agent initialized successfully.
+2026-02-14T18:25:38.062830+0100 - INFO - Processing incoming emails in batches.
+2026-02-14T18:25:45.739937+0100 - INFO - Processing email with cash application tool.
+2026-02-14T18:25:45.981121+0100 - INFO - Processing email with AR support tool.
+2026-02-14T18:25:46.065983+0100 - INFO - Processing email with cash application tool.
+2026-02-14T18:25:46.221400+0100 - INFO - Processing email with cash application tool.
+2026-02-14T18:25:46.291241+0100 - INFO - Processing email with disputes tool.
+2026-02-14T18:25:47.948709+0100 - INFO - Processing email with disputes tool.
+2026-02-14T18:30:16.886611+0100 - INFO - Email agent initialized successfully.
+2026-02-14T18:30:16.888013+0100 - INFO - Processing incoming emails in batches.
+2026-02-14T18:30:20.782559+0100 - INFO - Processing email with cash application tool.
+2026-02-14T18:30:21.246811+0100 - INFO - Processing email with cash application tool.
+2026-02-14T18:30:21.679059+0100 - INFO - Processing email with disputes tool.
+2026-02-14T18:30:21.831535+0100 - INFO - Processing email with cash application tool.
+2026-02-14T18:30:22.281953+0100 - INFO - Processing email with AR support tool.
+2026-02-14T18:30:26.567003+0100 - INFO - Emails processed successfully.

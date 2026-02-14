@@ -9,6 +9,7 @@ from loguru import logger
 from typing import List
 from langchain.agents import AgentState
 import json
+from langfuse.langchain import CallbackHandler
 from .states import Category, AgentExpectedOutput
 
 class EmailAgent():
@@ -16,6 +17,7 @@ class EmailAgent():
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-4.1-mini-2025-04-14", temperature=0.0)
         self.tools = [self.cash_application_tool, self.disputes_tool, self.ar_support_tool]
+        self.langfuse_handler = CallbackHandler()
         self.agent = create_agent(
             model=self.llm,
             response_format=ProviderStrategy(AgentExpectedOutput),
@@ -40,7 +42,7 @@ class EmailAgent():
         logger.info("Processing incoming email.")
         response = await self.agent.ainvoke({
             "messages": [HumanMessage(content=email)]
-        })
+        }, config={"callbacks": [self.langfuse_handler]})
         logger.info("Email processed successfully.")
         return response.get('structured_response')
     
@@ -50,7 +52,7 @@ class EmailAgent():
         responses = await self.agent.abatch(
             [
                 {"messages": [HumanMessage(content=email)]} for email in emails
-            ]
+            ], config={"callbacks": [self.langfuse_handler]}
         )
         logger.info("Emails processed successfully.")
         return [
@@ -64,7 +66,8 @@ class EmailAgent():
         This tool should be called if the category of the email is identified as Payment Claim.
         """
         logger.info("Processing email with cash application tool.")
-        output = AgentExpectedOutput(**json.loads(runtime.state['messages'][-1].content))
+        if runtime.state['messages'][-1].content:
+            output = AgentExpectedOutput(**json.loads(runtime.state['messages'][-1].content))
 
     @tool
     @staticmethod
@@ -73,7 +76,8 @@ class EmailAgent():
         This tool should be called if the category of the email is identified as Dispute.
         """
         logger.info("Processing email with disputes tool.")
-        output = AgentExpectedOutput(**json.loads(runtime.state['messages'][-1].content))
+        if runtime.state['messages'][-1].content:
+            output = AgentExpectedOutput(**json.loads(runtime.state['messages'][-1].content))
 
     @tool
     @staticmethod
@@ -82,4 +86,5 @@ class EmailAgent():
         This tool should be called if the category of the email is identified as General AR Request.
         """
         logger.info("Processing email with AR support tool.")
-        output = AgentExpectedOutput(**json.loads(runtime.state['messages'][-1].content))
+        if runtime.state['messages'][-1].content:
+            output = AgentExpectedOutput(**json.loads(runtime.state['messages'][-1].content))
