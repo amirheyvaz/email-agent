@@ -52,7 +52,7 @@ This will:
 ## Langfuse (optional tracing)
 - Set `LANGFUSE_SECRET_KEY`, `LANGFUSE_PUBLIC_KEY`, and `LANGFUSE_BASE_URL` in `.env`.
 - With these set, Langfuse will capture traces from the agent runs for observability. Without them, tracing is skipped. 
-- View your traces in the Langfuse dashboard at [Langfuse cloud fashboard](https://cloud.langfuse.com).
+- View your traces in the Langfuse dashboard at [Langfuse cloud dashboard](https://cloud.langfuse.com).
 
 ## Project structure
 - `src/email_agent/` — core agent, schemas, categories
